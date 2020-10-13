@@ -1,24 +1,32 @@
 import numpy as np
 
+# Computational Basis 
 comp_0 = np.array([1,0])
 comp_1 = np.array([0,1])
 
+# Fourier Basis
 four_pos = 1/np.sqrt(2) * np.array([1,1])
 four_neg = 1/np.sqrt(2) * np.array([1,-1])
 
+# Ciruclar Basis
 circ_cw = 1/1/np.sqrt(2) * np.array([1, 1j])
 circ_ccw = 1/1/np.sqrt(2) * np.array([1, -1j])
 
+# Bell Basis
 bell_00 = 1/np.sqrt(2) * np.array([1,0,0, 1])
 bell_01 = 1/np.sqrt(2) * np.array([1,0,0,-1])
 bell_10 = 1/np.sqrt(2) * np.array([0,1, 1,0])
 bell_11 = 1/np.sqrt(2) * np.array([0,1,-1,0])
 
+# Pauli Matrices
 X = np.array([[0,1],[1,0]])
 Y = np.array([[0,-1j],[1j,0]])
 Z = np.array([[1,0],[0,-1]])
 I = np.array([[1,0],[0,1]])
+
+# Common Operations
 H = 1/np.sqrt(2)*np.array([[1,1],[1,-1]])
+CNOT = np.array([[1,0,0,0],[0,1,0,0], [0,0,0,1], [0,0,1,0]])
 
 def outer_product(a, b):
     return np.outer(a,b)
@@ -53,10 +61,6 @@ def ket(*vectors):
     output = np.transpose(output)
 
     return output
-
-def cnot(a):
-    cnot_mat = np.array([[1,0,0,0],[0,1,0,0],[0,0,0,1],[0,0,1,0]])
-    return np.matmul(cnot_mat, a)
 
 
 # a = np.zeros((16,16))
