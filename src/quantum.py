@@ -105,5 +105,12 @@ def circuit(input_vector, circuit, reverse=True):
 
     return output
 
+def simplify_circuit(circuit, reverse=True):
+    output = np.identity(4)
+    for operator in circuit[::-1]:
+        output = np.matmul(operator, output)
+
+    return output
+
 def measure(a):
     pass
