@@ -127,3 +127,14 @@ def fourier(size, number):
         vector += current
 
     return np.sqrt(size) * vector
+
+def fourier_transform(size):
+    transform = np.zeros((size, size))
+    for i in range(size):
+        current_vector_a = np.transpose(fourier(size, i))
+        current_vector_b = np.zeros((size,))
+        current_vector_b[i] = 1
+        # print(current_vector_b.shape)
+        transform += np.outer(current_vector_a, current_vector_b)
+
+    return transform
