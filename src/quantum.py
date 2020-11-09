@@ -114,3 +114,16 @@ def simplify_circuit(circuit, reverse=True):
 
 def measure(a):
     pass
+
+def omega(N):
+    power = np.pi * (1j) * 2 / N
+    return np.e ** power
+
+def fourier(size, number):
+    vector = np.zeros((size,))
+    for i in range(size):
+        current = np.zeros((size,))
+        current[i] =  np.power(omega(size), (number * i))
+        vector += current
+
+    return np.sqrt(size) * vector
