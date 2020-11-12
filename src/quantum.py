@@ -120,21 +120,32 @@ def omega(N):
     return np.e ** power
 
 def fourier(size, number):
-    vector = np.zeros((size,))
+    vector = np.zeros((size,), dtype=np.dtype('c16'))
     for i in range(size):
-        current = np.zeros((size,))
-        current[i] =  np.power(omega(size), (number * i))
+        current = np.zeros((size,), dtype=np.dtype('c16'))
+        current[i] =  np.power(omega(size), ((number * i)))
         vector += current
 
     return np.sqrt(size) * vector
 
 def fourier_transform(size):
-    transform = np.zeros((size, size))
+    transform = np.zeros((size, size), dtype=np.dtype('c16'))
     for i in range(size):
         current_vector_a = np.transpose(fourier(size, i))
         current_vector_b = np.zeros((size,))
         current_vector_b[i] = 1
         # print(current_vector_b.shape)
+        transform += np.outer(current_vector_a, current_vector_b)
+
+    return 1 / np.sqrt(size) * transform
+
+def translation_transform(size):
+    transform = np.zeros((size, size))
+    for i in range(size):
+        current_vector_a = np.zeros((size,))
+        current_vector_a[((i + 1) % size)] = 1
+        current_vector_b = np.zeros((size,))
+        current_vector_b[i] = 1
         transform += np.outer(current_vector_a, current_vector_b)
 
     return transform
